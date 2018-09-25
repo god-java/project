@@ -302,10 +302,10 @@ public class ToonController {
 		tdao = sst.getMapper(ToonDAO.class);
 		String upload_type = "월간";
 	   	ArrayList<ToonDTO> tlist = tdao.monthly_toon_list(upload_type);
-	   	for(int i=0; i<tlist.size(); i++){
-	   		if(tlist.get(i).getToon_info().length()>200) {
-	   			String toon_info_sub = tlist.get(i).getToon_info().substring(0,200)+"...";
-	   			tlist.get(i).setToon_info_sub(toon_info_sub);
+		for(ToonDTO tdto : tlist) {
+	   		if(tdto.getToon_info().length()>300) {
+	   			String toon_info_sub = tdto.getToon_info().substring(0,300)+"...";
+	   			tdto.setToon_info_sub(toon_info_sub);
 	   		}
 	   	}
 	   	m.addAttribute("tlist", tlist);
