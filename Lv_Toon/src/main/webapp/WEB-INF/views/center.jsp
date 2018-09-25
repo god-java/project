@@ -371,7 +371,33 @@ canvas{display:inline-block; vertical-align:baseline; display:relative;}
 			},1000)
 			
 		}
-		
+		var a=0
+		$(window).scroll(function () {
+			var height = $(document).scrollTop();			
+			var obj = $("#rank_div").offset();
+			if(height >= obj.top - 400){
+				
+				// rank 나타나게
+			}
+			var scrollTop = $(document).scrollTop()
+			if(scrollTop>2500 && a==0){
+				a++
+				$("#view_best").css({'opacity':'1'})
+				$("#best_image").css({'top':'0px'})
+				setTimeout(function(){
+					$("#best_info").css({'left':'300px'})
+				},400)
+				setTimeout(function(){
+				$("#best_info").css({'opacity':'1'})
+				},500)
+				setTimeout(function(){
+					for(var i = 0; i < 100; i++){
+						draw(i);
+					}
+				},1000)
+				
+			}
+		}); 
 		function draw(delay){	       
 			setTimeout(function() {
 				ctx.strokeStyle = "#ee312f";
