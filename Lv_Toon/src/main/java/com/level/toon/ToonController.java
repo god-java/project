@@ -300,8 +300,14 @@ public class ToonController {
 	@RequestMapping(value="/monthly")
 	public String monthly(Model m) {
 		tdao = sst.getMapper(ToonDAO.class);
-		String upload_type = "주간";
+		String upload_type = "월간";
 	   	ArrayList<ToonDTO> tlist = tdao.monthly_toon_list(upload_type);
+	   	for(int i=0; i<tlist.size(); i++){
+	   		if(tlist.get(i).getToon_info().length()>200) {
+	   			String toon_info_sub = tlist.get(i).getToon_info().substring(0,200)+"...";
+	   			tlist.get(i).setToon_info_sub(toon_info_sub);
+	   		}
+	   	}
 	   	m.addAttribute("tlist", tlist);
 	   	m.addAttribute("center", "monthly.jsp");
 	   	return "main";
