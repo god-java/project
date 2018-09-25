@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.level.toon.dao.ChargeDAO">
+	<insert id="add_charge" parameterType="com.level.toon.dto.ChargeDTO">
+		insert into lt_charge values(#{member_num},#{charge_method},#{charge_price},#{charge_coin},default)
+	</insert>
+	<select id="charge_list" parameterType="int" resultType="com.level.toon.dto.ChargeDTO">
+		select * from lt_charge where member_num=#{member_num} order by charge_date desc
+	</select>
+</mapper>

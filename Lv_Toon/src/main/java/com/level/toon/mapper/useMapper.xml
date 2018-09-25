@@ -10,4 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="add_use" parameterType="com.level.toon.dto.UseDTO">
 		insert into lt_use values(#{member_num},#{toon_num},#{ep_num},default,default,default)
 	</insert>
+	<select id="use_list" parameterType="int" resultType="com.level.toon.dto.UseDTO">
+		select * from lt_use u join lt_toon t on u.toon_num = t.toon_num join lt_episode e on u.ep_num = e.ep_num where u.member_num=#{member_num} order by use_date desc
+	</select>
 </mapper>

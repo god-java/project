@@ -288,7 +288,11 @@ public class ToonController {
 				}
 			}
 		}
-				
+		if(tdto.getToon_info().length()>200) {
+			String toon_info_sub = tdto.getToon_info().substring(0,200)+"...";
+			tdto.setToon_info_sub(toon_info_sub);
+		}		
+		
 		m.addAttribute("ep_count", ep_count);
 		m.addAttribute("tdto", tdto);
 		m.addAttribute("elist", elist);

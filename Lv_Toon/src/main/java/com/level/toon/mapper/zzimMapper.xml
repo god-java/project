@@ -13,4 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="remove_zzim" parameterType="com.level.toon.dto.ZzimDTO">
 		delete from lt_zzim where toon_num = #{toon_num} and member_num = #{member_num}
 	</delete>
+	<select parameterType="int" id="zzim_list" resultType="com.level.toon.dto.ZzimDTO">
+		select * from lt_library l join lt_zzim z on l.toon_num = z.toon_num join lt_toon t on z.toon_num=t.toon_num where l.member_num=#{member_num}
+	</select>
 </mapper>

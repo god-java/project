@@ -1,6 +1,6 @@
 package com.level.toon.dto;
 
-public class ZzimDTO {
+public class ZzimDTO extends ObjectDTO {
 	private int toon_num;
 	private int member_num;
 	private String zzim_date;
