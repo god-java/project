@@ -16,6 +16,9 @@ public interface ToonDAO {
 	public ArrayList<ObjectDTO> monthly_list();
 	public ArrayList<ObjectDTO> new_list();
 	public ArrayList<ToonDTO> monthly_toon_list(String upload_type);
-	public ArrayList<ToonDTO> all_rank_list();
-	public ArrayList<ToonDTO> cate_rank_list(int cate_num);
+	public ArrayList<ObjectDTO> day_rank(String upload_type);
+	public ArrayList<ObjectDTO> new_rank();
+	public ArrayList<ObjectDTO> tr_list();
+	public ArrayList<ObjectDTO> ta_list();
+	public ArrayList<ObjectDTO> tf_list();
 }

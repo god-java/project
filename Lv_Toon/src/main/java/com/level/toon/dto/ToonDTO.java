@@ -13,6 +13,7 @@ public class ToonDTO extends ObjectDTO {
 	private String toon_info;
 	private String reg_date;
 	private String toon_info_sub;
+	
 	public String getToon_info_sub() {
 		return toon_info_sub;
 	}

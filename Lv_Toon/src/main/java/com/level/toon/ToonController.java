@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -23,10 +25,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.level.toon.MainController.CompareSeqDesc;
 import com.level.toon.dao.CategoryDAO;
 import com.level.toon.dao.DayDAO;
 import com.level.toon.dao.EpisodeDAO;
 import com.level.toon.dao.SawDAO;
+import com.level.toon.dao.StarScoreDAO;
 import com.level.toon.dao.ToonDAO;
 import com.level.toon.dao.ZzimDAO;
 import com.level.toon.dto.CategoryDTO;
@@ -48,6 +52,7 @@ public class ToonController {
 	private EpisodeDAO edao;
 	private ZzimDAO zdao;
 	private SawDAO sdao;
+	private StarScoreDAO ssdao;
 	
 	@RequestMapping(value="/toon_upload")
 	public String toon_upload(Model m) {
@@ -62,12 +67,12 @@ public class ToonController {
 	public String toon_upload_ok(ToonDTO tdto, Model m,
 			@RequestParam(value="toon_file") MultipartFile file, @RequestParam(value="toon_file2") MultipartFile file2) {
 		tdao = sst.getMapper(ToonDAO.class);
-		String up_path = "C:\\Users\\wnstn\\Desktop\\level_toon\\Lv_Toon (9)\\Lv_Toon\\src\\main\\webapp\\resources\\toon_main_img\\";
+		String up_path = "C:/spring/study/Lv_Toon/src/main/webapp/resources/toon_main_img/";
 		// E:/spring2/Lv_Toon/src/main/webapp/resources/toon_main_img/
 		// C:/spring/study/Lv_Toon/src/main/webapp/resources/toon_main_img/
 		File f = new File(up_path+file.getOriginalFilename());
 		tdto.setMain_image(file.getOriginalFilename());
-		String up_path2 = "C:\\Users\\wnstn\\Desktop\\level_toon\\Lv_Toon (9)\\Lv_Toon\\src\\main\\webapp\\resources\\toon_main_img\\";
+		String up_path2 = "C:/spring/study/Lv_Toon/src/main/webapp/resources/toon_main_img2/";
 		// E:/spring2/Lv_Toon/src/main/webapp/resources/toon_main_img2/
 		// C:/spring/study/Lv_Toon/src/main/webapp/resources/toon_main_img2/
 		File f2 = new File(up_path2+file2.getOriginalFilename());
@@ -141,7 +146,7 @@ public class ToonController {
 		SimpleDateFormat sdf = new SimpleDateFormat("E",Locale.KOREAN);
 		Date date = new Date();
 		String today=sdf.format(date);
-		for(DayDTO ddto : dlist) {				//占쏙옙占쏙옙占싱몌옙 today
+		for(DayDTO ddto : dlist) {				//오늘이면 today
 			if(ddto.getToday().equals(today)) {
 				ddto.setToday_status("today");
 			}
@@ -189,7 +194,7 @@ public class ToonController {
 		SimpleDateFormat sdf = new SimpleDateFormat("E",Locale.KOREAN);
 		Date date = new Date();
 		String today=sdf.format(date);
-		for(DayDTO ddto : dlist) {				
+		for(DayDTO ddto : dlist) {				//오늘이면 today
 			if(ddto.getToday().equals(today)) {
 				ddto.setToday_status("today");
 			}
@@ -283,11 +288,7 @@ public class ToonController {
 				}
 			}
 		}
-		if(tdto.getToon_info().length()>200) {
-			String toon_info_sub = tdto.getToon_info().substring(0,200)+"...";
-			tdto.setToon_info_sub(toon_info_sub);
-		}		
-		
+				
 		m.addAttribute("ep_count", ep_count);
 		m.addAttribute("tdto", tdto);
 		m.addAttribute("elist", elist);
@@ -295,98 +296,66 @@ public class ToonController {
 		m.addAttribute("center", "episode_page.jsp");
 		return "main";
 	}
-	@RequestMapping(value="/episode_page_monthly")
-	public String episode_page_monthly(Model m, int toon_num, HttpSession s) {
-		tdao = sst.getMapper(ToonDAO.class);
-		sdao = sst.getMapper(SawDAO.class);
-		ToonDTO tdto = tdao.toon_info(toon_num);
-		edao = sst.getMapper(EpisodeDAO.class);
-		ArrayList<EpisodeDTO> elist = edao.episode_list(toon_num);
-		for(int i = 0; i < elist.size(); i++) {
-			String upload_date = elist.get(i).getEp_upload_date();
-			String upload_date2 = upload_date.substring(0, 10);
-			String upload_date3 = upload_date2.replace('-', '.');
-			elist.get(i).setEp_upload_date(upload_date3);
-		}
-		int ep_count = 0;
-		if(elist.size()>0) {
-			ep_count = elist.size() - 1;
-		}
-		
-		zdao = sst.getMapper(ZzimDAO.class);
-		int member_num;
-		int ck_zzim = 0;
-		if(s.getAttribute("member_num")!=null) {
-			String member_num2 = s.getAttribute("member_num").toString();
-			member_num = Integer.parseInt(member_num2);
-			ZzimDTO zdto = new ZzimDTO();
-			zdto.setMember_num(member_num);
-			zdto.setToon_num(toon_num);
-			ck_zzim = zdao.ck_zzim(zdto);
-			
-		}		
-		
-		SawDTO sdto = new SawDTO();
-		if(s.getAttribute("member_num")!=null) {
-			for(EpisodeDTO edto : elist) {
-				String member_num3 = (String)s.getAttribute("member_num").toString();
-				int member_num4 = Integer.parseInt(member_num3);
-				sdto.setMember_num(member_num4);
-				sdto.setToon_num(toon_num);
-				sdto.setEp_num(edto.getEp_num());
-				int count = sdao.saw_count(sdto);
-				if(count>0) {
-					edto.setSaw_status("o");
-				}
-			}	
-		}			
-				
-		for(EpisodeDTO edto : elist) {
-			Calendar today = Calendar.getInstance();
-			Calendar d_day = Calendar.getInstance();
-			if(edto.getFree_date()!=null) {
-				String[] free_date = edto.getFree_date().split("-");
-				int year = Integer.parseInt(free_date[0]);
-				int month = Integer.parseInt(free_date[1]);
-				int day = Integer.parseInt(free_date[2]);
-				d_day.set(year, month-1, day);
-				
-				long l_today = today.getTimeInMillis() / (24*60*60*1000);
-				long l_d_day = d_day.getTimeInMillis() / (24*60*60*1000);
-				
-				int last_d_day = (int)(l_d_day-l_today);
-				edto.setD_day(last_d_day);
-				
-				if(last_d_day<=0) {
-					edto.setFree("o");
-				}
-			}
-		}
-		
-		String toon_info_sub = tdto.getToon_info().substring(0,200)+"...";
-		tdto.setToon_info_sub(toon_info_sub);
-		
-		m.addAttribute("ep_count", ep_count);
-		m.addAttribute("tdto", tdto);
-		m.addAttribute("elist", elist);
-		m.addAttribute("ck_zzim", ck_zzim);
-		m.addAttribute("center", "episode_page_monthly.jsp");
-		return "main";
-	}
 	
 	@RequestMapping(value="/monthly")
 	public String monthly(Model m) {
 		tdao = sst.getMapper(ToonDAO.class);
-		String upload_type = "월간";
+		String upload_type = "주간";
 	   	ArrayList<ToonDTO> tlist = tdao.monthly_toon_list(upload_type);
-	   	for(ToonDTO tdto : tlist) {
-	   		if(tdto.getToon_info().length()>300) {
-	   			String toon_info = tdto.getToon_info().substring(0,300)+"...";
-	   			tdto.setToon_info(toon_info);
-	   		}
-	   	}
 	   	m.addAttribute("tlist", tlist);
 	   	m.addAttribute("center", "monthly.jsp");
 	   	return "main";
 	 }
+	
+	@RequestMapping(value="/rank_10", produces="application/text; charset=utf-8")
+	public @ResponseBody String Rank_10(String rank) {
+		tdao = sst.getMapper(ToonDAO.class);
+		String json = "";
+		Map<String, Object> map = new HashMap<String, Object>();
+		ObjectMapper mapper = new ObjectMapper();
+		SimpleDateFormat sdf = new SimpleDateFormat("E",Locale.KOREAN);
+		Date date = new Date();
+		String upload_day = sdf.format(date);
+		
+		ArrayList<ObjectDTO> rlist = new ArrayList<ObjectDTO>();
+		if(rank.equals("today")) {
+			rlist = tdao.day_rank(upload_day); // 임시
+		}else {
+			rlist = tdao.new_list();
+		}
+		
+		ssdao = sst.getMapper(StarScoreDAO.class);
+		for(int i = 0; i < rlist.size(); i++) {
+			int toon_num = rlist.get(i).getToon_num();
+			if(ssdao.exist_star_score(toon_num) > 0) {
+				float toon_star_rating = ssdao.avg_star_score(toon_num);
+				rlist.get(i).setToon_star_rating(toon_star_rating);				
+			} else {
+				rlist.get(i).setToon_star_rating(0);
+			}
+		}
+		
+		Collections.sort(rlist, new CompareSeqDesc());		
+		ObjectDTO rdto = new ObjectDTO();
+		if(rlist.size() > 0) {
+			rdto = rlist.get(0);
+		}
+		
+		map.put("rlist", rlist);
+		map.put("rdto", rdto);
+		try {
+			json = mapper.writeValueAsString(map);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return json;
+	}
+	
+
+	static class CompareSeqDesc implements Comparator<ObjectDTO>{
+		@Override
+		public int compare(ObjectDTO o1, ObjectDTO o2) {
+			return o1.getToon_star_rating() > o2.getToon_star_rating() ? -1 : o1.getToon_star_rating() < o2.getToon_star_rating() ? 1:0;
+		}        
+    }
 }

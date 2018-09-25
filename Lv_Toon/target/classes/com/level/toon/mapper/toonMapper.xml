@@ -40,10 +40,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="monthly_toon_list" parameterType="String" resultType="com.level.toon.dto.ToonDTO">
 		select * from lt_toon t join lt_category c on t.cate_num = c.cate_num where t.upload_type=#{uploadType} order by t.toon_num desc
 	</select>
-	<select id="all_rank_list" resultType="com.level.toon.dto.ToonDTO">
-		select * from lt_toon t join lt_category c on t.cate_num=c.cate_num join lt_star_score s on t.toon_num=s.toon_num order by s.star_score desc
+	<select id="day_rank" parameterType="String" resultType="com.level.toon.dto.ObjectDTO">
+		<!-- select * from lt_toon t join lt_category c on t.cate_num = c.cate_num where t.upload_day=#{upload_day} and t.upload_type = '주간' -->
+		<![CDATA[ 
+			select * from(select A.*, rownum rnum from(select * from lt_toon t join lt_category c on t.cate_num = c.cate_num where t.upload_day=#{upload_day} and t.upload_type = '주간')A) where rnum >= 1 and rnum <= 10
+		]]>
 	</select>
-	<select id="cate_rank_list" parameterType="int" resultType="com.level.toon.dto.ToonDTO">
-		select * from lt_toon t join lt_category c on t.cate_num=c.cate_num join lt_star_score s on t.toon_num=s.toon_num where t.cate_num=#{cate_num} order by s.star_score desc
+	<select id="new_rank" resultType="com.level.toon.dto.ObjectDTO">
+		<![CDATA[ 
+			select * from(select A.*, rownum rnum from(select * from lt_toon t join lt_category c on t.cate_num = c.cate_num where t.reg_date > to_char(sysdate-60, 'yyyy-mm-dd hh24:mi'))A) where rnum >= 1 and rnum <= 10
+		]]>		
+	</select> 
+	<select id="tr_list" resultType="com.level.toon.dto.ObjectDTO">
+		select * from lt_toon t join lt_category c on t.cate_num = c.cate_num where t.cate_num=1 or t.cate_num=2
+	</select>
+	<select id="ta_list" resultType="com.level.toon.dto.ObjectDTO">
+		select * from lt_toon t join lt_category c on t.cate_num = c.cate_num where t.cate_num=3
+	</select>
+	<select id="tf_list" resultType="com.level.toon.dto.ObjectDTO">
+		select * from lt_toon t join lt_category c on t.cate_num = c.cate_num where t.cate_num=4
 	</select>
 </mapper>

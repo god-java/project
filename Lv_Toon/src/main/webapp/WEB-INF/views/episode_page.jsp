@@ -39,17 +39,11 @@
 	.list_ep_star{float:left; width:80px; font-weight:200; font-size:15px;}
 	.list_ep_upload_date{float:left; width:100px; font-weight:400; font-size:15px;}
 	.list_ep_coin{float:left; width:90px; font-weight:400; font-size:15px;}
-	
-	#episode_page_monthly{width:1260px; margin:30px auto; background:black; overflow:hidden;}
-	#monthly_toon_info, #monthly_toon_info div{color:white; background:black;}
-	#toon_ep, #toon_ep div{ color:white;}
-	#center{background:black;}
-	#info_view_mask{width:0px; height:0px; position:absolute; top:0; left:0; opacity:0; background:black;}
-	#ep_info{background:#00001E;}
 </style>
 </head>
 <script type="text/javascript">
 	$(document).ready(function(){
+		alert("~~")
 		$(document).on('click', '#upload_episode_btn', function(){
 			var ep_num = ${elist.size()}
 			location.href = "episode_upload?toon_num="+${tdto.toon_num}+"&ep_num="+ep_num
@@ -177,9 +171,7 @@
 	})
 </script>
 <body>
-<c:if test="${tdto.upload_type=='주간' }">
-<div style="background:white; width:100%;">
-	<div id="" style="width:1260px; margin:0 auto; background:white;">
+	<div id="" style="width:1260px; margin:0 auto;">
 		<div id="toon_info" style="width:100%; height:390px; margin-top:40px;">
 			<div style="float:left; width:280px; height:100%;">
 				<img src="resources/toon_main_img/${tdto.main_image }" style="width:100%; height:100%;">
@@ -263,7 +255,7 @@
 							</div>	
 						</c:if>
 						<c:if test="${elist.saw_status!='o' }">
-							<div id="ep_info" param="${elist.ep_num }" param2="${elist.toon_num }" param3="${elist.free }" param4="${elist.view_coin }" style="background:white;">
+							<div id="ep_info" param="${elist.ep_num }" param2="${elist.toon_num }" param3="${elist.free }" param4="${elist.view_coin }">
 								<div id="thumb_div" style="position:relative;">
 									<div class="thumb_img">
 										<img id="ep_img" class="ep_img" src="resources/episode_main_img/${elist.ep_main_image }" style="width:100%; height:100%;">
@@ -323,222 +315,5 @@
 			</div>
 		</div>
 	</div>
-</div>
-	
-</c:if>
-	
-	
-	<script type="text/javascript">
-$(document).ready(function(){
-	$("#info_view").click(function(){
-		var width = $(document).width()
-		var height = $(document).height()
-			$("#info_view_mask").css({'width':width, 'height':height, 'z-index':'9'})
-			$("#info_view_mask").fadeTo('fade',0.7)
-			$("#toon_info").css({'top':'0%','left':'35%'})
-		setTimeout(function(){
-			$("#toon_info").css({'opacity':'1'})
-		},10)
-		setTimeout(function(){
-			$("#toon_info").css({'top':'15%','left':'35%'})
-		},0)
-		
-		
-	})
-	$("#info_view_mask").click(function(){
-		$("#info_view_mask").fadeOut()
-			$("#toon_info").css({'opacity':'0'})
-		setTimeout(function(){
-			$("#toon_info").css({'top':'-10%','left':'35%'})
-		},10)
-		setTimeout(function(){
-			$("#toon_info").css({'top':'-100%','left':'35%'})
-		},0)
-		
-	})
-})
-</script>
-	
-	
-	
-<c:if test="${tdto.upload_type=='월간' }">	
-	<div id="info_view_mask">
-	
-	</div>
-	<div id="toon_info" style="width:500px; height:400px; border:1px solid silver; position:fixed; top:-100px; left:35%; -webkit-transition-duration:0.5s; opacity:0; background:black; z-index:10000; border:1px solid #D8D8D8;">
-		<div style="width:90%; height:90%; margin:0 auto; margin-top:5%; color:white;">
-			<p style="font-size:20px;">${tdto.toon_title }</p>
-			${tdto.toon_info }
-		</div>
-	</div>
-	<div style="width:100%; height:450px; position:relative; display:flex; flex-direction:row;">
-		<img src="resources/toon_main_img2/${tdto.main_image2 }" style="width:100%; height:100%; position:absolute; top:0; left:0; z-index:1;">
-		<div style="width:50%; height:100%;">
-		
-		</div>
-		<div id="monthly_toon_info" style="width:50%; height:100%; position:relative; z-index:2;">
-			<div id="toon_title" style="padding:30px 50px;/* margin-top:20px; margin-bottom:20px; margin-left:50px; */">
-						<h2 style="font-size:50px; font-weight:300; letter-spacing:-1.5px; margin:0; color:white;">${tdto.toon_title }</h2>					
-					</div>
-					<div id="toon_content" style="height:244px; font-size:10px; padding:10px 50px;">
-						<div style="color:#9e9e9e; margin-top:10px;">
-							글/그림 :
-							<c:choose>
-								<c:when test="${tdto.toon_writer == tdto.toon_painter }">
-									${tdto.toon_writer }
-								</c:when>
-								<c:otherwise>
-									${tdto.toon_writer } / ${tdto.toon_painter }
-								</c:otherwise>
-							</c:choose>
-							&nbsp;&nbsp;&nbsp;&nbsp;
-							장르 : ${tdto.cate_name }
-						</div>
-						<div style="letter-spacing:-1.5px;">
-							<h5>작품정보</h5>
-							<p style="height:80px;">
-							${tdto.toon_info_sub } <a href="#" id="info_view" style="text-decoration:underline; color:white;">더보기+</a>
-							</p>
-						</div>
-						<div id="btns" style="position:relative; width:100%;">
-							<input type="button" id="view_ep_btn" value="무료로 첫화보기" style="">
-							<button id="zzim_btn">
-								<i class="far fa-heart" style="margin-right:5px;"></i> 찜하기
-							</button>
-							<button id="upload_episode_btn">
-								+
-							</button>
-						</div>
-					</div>
-		</div>
-	</div>
-	<div id="episode_page_monthly">
-		<div id="toon_ep" style="width:1260px; margin:0 auto;">
-			<div id="ep_div">
-				<div id="ep_div_left">
-					<div style="width:100%; height:30px;">
-						<h5 style="margin:0; float:left;">총 ${ep_count }화 연재중</h5>				
-						<span style="float:right;">
-							<input type="button" id="all_charge_btn" value="전체소장">
-							<input type="button" id="order_btn" value="정렬변경">
-						</span>
-					</div>
-					<div id="ep_list">
-						<c:forEach var="elist" items="${elist }">
-							<c:if test="${elist.saw_status=='o' }">
-								<div id="ep_info" param="${elist.ep_num }" param2="${elist.toon_num }" param3="${elist.free }" param4="${elist.view_coin }" style="background:#000046;">
-									<div id="thumb_div" style="position:relative;">
-										<div class="thumb_img">
-											<img id="ep_img" class="ep_img" src="resources/episode_main_img/${elist.ep_main_image }" style="width:100%; height:100%;">
-											<c:if test="${elist.d_day>0 }">
-												<span style="position:absolute; width:40px; height:20px; line-height:20px; font-weight:boler; top:0; left:0; color:white; background:rgba(0,0,0,0.8);">
-													D-<span style="color:yellow">${elist.d_day }</span>
-												</span>
-											</c:if>
-										</div>
-									</div>						
-									<div class="list_ep_num">${elist.ep_num }</div>
-									<div class="list_ep_title">${elist.ep_title }</div>
-									<div class="list_ep_star"><i class="fas fa-star" style="color:#333;"></i>&nbsp;${elist.ep_star_rating }</div>
-									<div class="list_ep_upload_date">${elist.ep_upload_date }</div>
-									<div class="list_ep_coin">
-										<c:choose>
-											<c:when test="${elist.free=='o' }">
-												무료
-											</c:when>
-											<c:when test="${elist.free=='x' }">
-												유료
-											</c:when>
-										</c:choose>
-									</div>
-								</div>	
-							</c:if>
-							<c:if test="${elist.saw_status!='o' }">
-								<div id="ep_info" param="${elist.ep_num }" param2="${elist.toon_num }" param3="${elist.free }" param4="${elist.view_coin }">
-									<div id="thumb_div" style="position:relative;">
-										<div class="thumb_img">
-											<img id="ep_img" class="ep_img" src="resources/episode_main_img/${elist.ep_main_image }" style="width:100%; height:100%;">
-											<c:if test="${elist.d_day>0 }">
-												<span style="position:absolute; width:40px; height:20px; line-height:20px; font-weight:boler; top:0; left:0; color:white; background:rgba(0,0,0,0.8);">
-													D-<span style="color:yellow">${elist.d_day }</span>
-												</span>
-											</c:if>
-										</div>
-									</div>						
-									<div class="list_ep_num">${elist.ep_num }</div>
-									<div class="list_ep_title">${elist.ep_title }</div>
-									<div class="list_ep_star"><i class="fas fa-star" style="color:#333;"></i>&nbsp;${elist.ep_star_rating }</div>
-									<div class="list_ep_upload_date">${elist.ep_upload_date }</div>
-									<div class="list_ep_coin">
-										<c:choose>
-											<c:when test="${elist.free=='o' }">
-												무료
-											</c:when>
-											<c:when test="${elist.free=='x' }">
-												유료
-											</c:when>
-										</c:choose>
-									</div>
-								</div>	
-							</c:if>						
-						</c:forEach>
-					</div>	
-					<%-- <ul class="ep_list" style="list-style:none; display:block; padding:0; margin:0;">
-						<c:forEach var="elist" items="${elist }">
-							<li class="ep_list_li" style="width:100%; text-align:-webkit-match-parent; overflow:hidden; margin-bottom:7px; background:#fcfcfc; -webkit-transition-duration:0.5s;">
-								<a href="view_episode?toon_num=${elist.toon_num}&ep_num=${elist.ep_num}" style="display:block; width:100%;">
-									<div class="thumb_img" style="display:block; width:200px;">
-										<img src="resources/episode_main_img/${elist.ep_main_image }" style="width:200px; height:120px;">
-									</div>
-									<div class="list_ep_num" style="display:block; position:relative; width:90px; text-align:center; font-weight:400; font-size:20px;">${elist.ep_num }</div>
-									<div class="list_ep_title" style="display:block; position:relative; width:90px; text-align:center; font-weight:400; font-size:20px;">
-								</a>
-							</li>
-						</c:forEach>					
-					</ul> --%>
-					
-				</div>
-				
-				<div id="ep_div_right" style="float:right; width:410px; height:400px; margin-left:60px;">
-					<h5 style="margin:0; margin-bottom:30px;">SNS공유하기</h5>
-					<div id="share_btns">
-						<input type="button" id="share_fb_btn" value="facebook">
-						<input type="button" id="share_tw_btn" value="twitter">
-					</div>
-					<h5 style="margin:0; margin-bottom:30px; margin-top:40px;">PD의 한마디</h5>
-					<p>~~~~~~~~~~~~~asdasdasdsADQWEQWDDASDASqweqe~~~~</p>
-					<hr style="margin-top:20px; margin-bottom:20px; border:0; border-top:1px solid #d8d8d8;">
-					<div style="float:right; width:100%;">
-						<input type="radio" id="rec_cate" name="group" checked><label for="rec_cate">장르추천</label>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	</c:if>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 </body>
 </html>

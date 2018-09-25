@@ -6,4 +6,6 @@ public interface StarScoreDAO {
 	public void reg_star_score(StarScoreDTO ssdto);
 	public int ck_star_score(StarScoreDTO ssdto);
 	public int find_star_score(StarScoreDTO ssdto);
+	public int exist_star_score(int toon_num);
+	public float avg_star_score(int toon_num);
 }

@@ -50,6 +50,14 @@ public class ObjectDTO {
 	private int ep_count;
 	private String reg_date;
 	private String toon_info_sub;
+	private float toon_star_rating;
+	
+	public float getToon_star_rating() {
+		return toon_star_rating;
+	}
+	public void setToon_star_rating(float toon_star_rating) {
+		this.toon_star_rating = toon_star_rating;
+	}
 	public String getToon_info_sub() {
 		return toon_info_sub;
 	}

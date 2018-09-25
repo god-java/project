@@ -35,19 +35,19 @@
 			<div>
 				<div style="width:80%; height:80%; margin-top:5%; margin-left:10%;">
 					<strong>아이디</strong>
-					<p>${email }</p>
+					<p>wnstn212@naver.com</p>
 				</div>
 			</div>
 			<div>
 				<div style="width:80%; height:80%; margin-top:5%; margin-left:10%;">
 					<strong>일반 코인</strong>
-					<p>${coin }</p>
+					<p>0</p>
 				</div>
 			</div>
 			<div>
 				<div style="width:80%; height:80%; margin-top:5%; margin-left:10%;">
 					<strong>보너스 코인</strong>
-					<p>${coin }</p>
+					<p>0</p>
 				</div>
 			</div>
 			<div>
@@ -62,12 +62,12 @@
 				<div style="width:90%; height:300px; margin:10px auto; border:1px solid #D8D8D8;">
 					<div style="width:80%; height:70%; margin:auto; border-bottom:1px solid #D8D8D8;">
 						<p>코인 내역</p>
-						<p><a href="charge_list">적립 내역</a></p>
-						<p><a href="use_list">이용 내역</a></p>
+						<p><a href="#">적립 내역</a></p>
+						<p><a href="#">이용 내역</a></p>
 						<br>
 						<p style="font-weight:bolder;">소장 작품</p>
-						<p><a href="my_library" style="color:#817EE4;">내서재</a></p>
-						<p><a href="zzim">찜목록</a></p>
+						<p><a href="#" style="color:#817EE4;">내서재</a></p>
+						<p><a href="#">찜목록</a></p>
 					</div>
 					<div style="width:80%; height:30%; margin:auto; text-align:center; line-height:90px;">
 						<button id="info_modify_btn">정보수정</button>

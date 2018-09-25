@@ -13,4 +13,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="find_star_score" parameterType="com.level.toon.dto.StarScoreDTO" resultType="int">
 		select star_score from lt_star_score where toon_num = #{toon_num} and ep_num = #{ep_num} and member_num = #{member_num}
 	</select>
+	<select id="exist_star_score" parameterType="int" resultType="int">
+		select count(*) from lt_star_score where toon_num = #{toon_num}
+	</select>
+	<select id="avg_star_score" parameterType="int" resultType="float">
+		select round(avg(l.star_score), 1) from lt_toon t join lt_star_score l on t.toon_num = l.toon_num where t.toon_num = #{toon_num} group by t.toon_num 
+	</select>
 </mapper>

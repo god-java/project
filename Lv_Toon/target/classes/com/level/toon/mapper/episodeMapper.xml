@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from lt_episode where toon_num=#{toon_num} and ep_num ${inequality} #{ep_num}
 	</select>
 	<update id="update_star_rating" parameterType="com.level.toon.dto.StarScoreDTO">
-		update lt_episode set ep_star_rating = (select avg(star_score) from lt_star_score where toon_num=#{toon_num} and ep_num=#{ep_num}) where toon_num=#{toon_num} and ep_num=#{ep_num}
+		update lt_episode set ep_star_rating = (select round(avg(star_score), 1) from lt_star_score where toon_num=#{toon_num} and ep_num=#{ep_num}) where toon_num=#{toon_num} and ep_num=#{ep_num}
 	</update>	
 	<select id="episode_count" parameterType="com.level.toon.dto.EpisodeDTO" resultType="int">
 		select count(*) from lt_episode where toon_num=#{toon_num} and ep_num=#{ep_num}

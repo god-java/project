@@ -21,7 +21,7 @@ html,body,div,span,ul,li,table,td,input[type='email'],input[type='password']{mar
 a{text-decoration:none; color:black; font-size:13px;}
 a:hover{color:#817EE4;}
 input[type='button'],button{cursor:pointer;}
-#header{width:100%; height:70px; border-bottom:1px solid #D8D8D8; z-index:9999; position:relative;}
+#header{width:100%; height:70px; border-bottom:1px solid #D8D8D8;}
 #header ul{width:100%; height:100%; line-height:70px; display:flex; flex-direction:row;}
 #header li:first-child{margin-left:5%;}
 #header li{width:10%; height:30px; margin:auto 0; list-style:none; line-height:30px; text-align:center;}
@@ -382,7 +382,7 @@ $(document).ready(function(){
             </a>
          </li>
          <li>
-            <a href="rank?type=all&cate_num=0">
+            <a href="#">
            	    랭킹
             </a>
          </li>
@@ -441,7 +441,7 @@ $(document).ready(function(){
                      <a href="my_page?member_num=${member_num }" style="margin-left:10px;">내서재</a>
                   </div>
                   <div id="my_info_menu" style="width:100%; height:50px; text-align:left; line-height:50px; border-bottom:1px solid #D8D8D8;">
-                     <a href="my_page?member_num=${member_num }" style="margin-left:10px;">찜목록</a>
+                     <a href="zzim" style="margin-left:10px;">찜목록</a>
                   </div>
                   <div id="my_info_menu" style="width:100%; height:50px; text-align:left; line-height:50px; border-bottom:1px solid #D8D8D8;">
                      <a href="logout" style="margin-left:10px;">로그아웃</a>
