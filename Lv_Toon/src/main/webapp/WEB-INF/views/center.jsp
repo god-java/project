@@ -324,6 +324,23 @@ canvas{display:inline-block; vertical-align:baseline; display:relative;}
 				
 				// rank 나타나게
 			}
+			var scrollTop = $(document).scrollTop()
+			if(scrollTop>2500){
+				$("#view_best").css({'opacity':'1'})
+				$("#best_image").css({'top':'0px'})
+				setTimeout(function(){
+					$("#best_info").css({'left':'300px'})
+				},400)
+				setTimeout(function(){
+				$("#best_info").css({'opacity':'1'})
+				},500)
+				setTimeout(function(){
+					for(var i = 0; i < 100; i++){
+						draw(i);
+					}
+				},1000)
+				
+			}
 		}); 
 	})
 	
@@ -336,8 +353,23 @@ canvas{display:inline-block; vertical-align:baseline; display:relative;}
 		}else{
 			end = (36 * toon_star_rating - 90) * Math.PI / 180
 		}
-		for(var i = 0; i < 100; i++){
-			draw(i);
+		
+		var scrollTop = $(document).scrollTop()
+		if(scrollTop>2580){
+			$("#view_best").css({'opacity':'1'})
+			$("#best_image").css({'top':'0px'})
+			setTimeout(function(){
+				$("#best_info").css({'left':'300px'})
+			},400)
+			setTimeout(function(){
+				$("#best_info").css({'opacity':'1'})
+			},500)
+			setTimeout(function(){
+				for(var i = 0; i < 100; i++){
+					draw(i);
+				}
+			},1000)
+			
 		}
 		
 		function draw(delay){	       
@@ -476,14 +508,14 @@ canvas{display:inline-block; vertical-align:baseline; display:relative;}
 	<div id="rank_div" style="width:100%; background:#e7e9ec; marign:0 auto;">
 		<div id="rank_div1" style="width:1260px; padding:80px 0; margin:0 auto;">
 			<div id="rank_row">
-				<div id="view_best">
-					<div id="best_img">
+				<div id="view_best" style="overflow:hidden; opacity:0; -webkit-transition-duration:0.5s;">
+					<div id="best_img" style="position:relative;">
 						<div class="best_flag"></div>						
 						<a href="episode_page?toon_num=${odto.toon_num} ">
-							<img src="resources/toon_main_img/${odto.main_image }" style="width:100%; height:100%;">
+							<img id="best_image" src="resources/toon_main_img/${odto.main_image }" style="width:100%; height:100%; position:absolute; top:400px; left:0; -webkit-transition-duration:0.5s;">
 						</a>
 					</div>
-					<div id="best_info">
+					<div id="best_info" style="position:absolute; top:10px; left:-200px; opacity:0; -webkit-transition-duration:0.5s;">
 						<div style="margin-left:40px; margin-top:25px;">
 							<span class="best_cate" style="display:block; font-size:11px; color:#7b7b7b;">${odto.cate_name }</span>
 							<strong class="best_title" style="display:block; margin-bottom:5px; color:white; font-size:20px; font-weight:400; overflow:hidden;">${odto.toon_title }</strong>
