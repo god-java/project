@@ -242,7 +242,7 @@ canvas{display:inline-block; vertical-align:baseline; display:relative;}
 		$(document).on('click', '#select_new', function(){
 			$('#select_new').css({'color' : 'white', 'border' : '1px solid red', 'background' : 'red'})
 			$('#select_today').css({'color' : '333', 'border' : '1px solid #aaa', 'background' : 'transparent'})
-			
+			alert("!")
 			$.ajax({
 				url : 'rank_10',
 				type : 'post',
