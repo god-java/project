@@ -382,7 +382,7 @@ $(document).ready(function(){
             </a>
          </li>
          <li>
-            <a href="#">
+            <a href="rank?cate_num=0&type=all">
            	    랭킹
             </a>
          </li>

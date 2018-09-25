@@ -21,4 +21,6 @@ public interface ToonDAO {
 	public ArrayList<ObjectDTO> tr_list();
 	public ArrayList<ObjectDTO> ta_list();
 	public ArrayList<ObjectDTO> tf_list();
+	public ArrayList<ToonDTO> all_rank_list();
+	public ArrayList<ToonDTO> cate_rank_list(int cate_num);
 }
