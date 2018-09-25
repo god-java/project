@@ -1,6 +1,6 @@
 package com.level.toon.dto;
 
-public class UseDTO {
+public class UseDTO extends ObjectDTO{
 	private int use_num;
 	private int member_num;
 	private int toon_num;
