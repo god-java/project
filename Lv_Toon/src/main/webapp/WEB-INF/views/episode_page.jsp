@@ -209,7 +209,7 @@
 						</p>
 					</div>
 					<div id="btns" style="position:relative; width:100%;">
-						<input type="button" id="view_ep_btn" value="무료로 첫화보기" style="">
+						<input type="button" id="view_ep_btn" onclick="location.href='toon_detail?toon_num=${tdto.toon_num}&ep_num=${tdto.ep_num }'" value="무료로 첫화보기" style="">
 						<button id="zzim_btn">
 							<i class="far fa-heart" style="margin-right:5px;"></i> 찜하기
 						</button>
@@ -401,7 +401,7 @@ $(document).ready(function(){
 							</p>
 						</div>
 						<div id="btns" style="position:relative; width:100%;">
-							<input type="button" id="view_ep_btn" value="무료로 첫화보기" style="">
+							<input type="button" id="view_ep_btn" onclick="location.href='toon_detail?toon_num=${tdto.toon_num}&ep_num=${tdto.ep_num }'" value="무료로 첫화보기" style="">
 							<button id="zzim_btn">
 								<i class="far fa-heart" style="margin-right:5px;"></i> 찜하기
 							</button>
