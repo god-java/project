@@ -18,7 +18,7 @@
 <title>Insert title here</title>
 <style type="text/css">
 #center{background:black}
-#monthly{width:1260px; height:1000px; margin:50px auto; background:black}
+#monthly{width:1260px; margin:50px auto; background:black}
 #monthly_info{width:100%; height:70px;}
 .slick-dots {
     position: absolute;
@@ -136,9 +136,9 @@ $(document).ready(function(){
                
                
                <div id="info_div" class="info_div${tlist.toon_num }" style="width:100%; height:100%; text-align:center; position:absolute; left:0; top:0; background:rgba(0,0,0,0.0); opacity:0; -webkit-transition-duration:0.5s;">
-				<div style="width:90%; height:80%; margin:0 auto; margin-top:5%; background:none; color:white;">
+				<div style="width:90%; height:80%; margin:0 auto; margin-top:5%; background:none;">
 					<p style="font-size:20px;">${tlist.toon_title }</p>
-               		${tlist.toon_info }
+               		${tlist.toon_info_sub }
 				</div>
 				<button id="view_btn${tlist.toon_num }" style="width:0%; height:0px; position:relative; top:200px; border:1px solid red; color:white; background:red; -webkit-transition-duration:0.5s;">바로보기</button>
                </div>
