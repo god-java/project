@@ -165,7 +165,8 @@ canvas{display:inline-block; vertical-align:baseline; display:relative;}
 		$(document).on('click', '#select_today', function(){
 			$('#select_today').css({'color' : 'white', 'border' : '1px solid red', 'background' : 'red'})
 			$('#select_new').css({'color' : '333', 'border' : '1px solid #aaa', 'background' : 'transparent'})
-			
+			$('#div_1').css({'color' : 'red'})
+	    	$('#div_6').css({'color' : '#787878'})
 			$.ajax({
 				url : 'rank_10',
 				type : 'post',
@@ -177,7 +178,7 @@ canvas{display:inline-block; vertical-align:baseline; display:relative;}
 					var best_html =  "<div id='best_img'>"
 						best_html += "<div class='best_flag'></div>"
 						best_html += "<a href='episode_page?toon_num="+rdto.toon_num +"'>"
-						best_html += "<img src='resources/toon_main_img/"+rdto.main_img+"' style='width:100%; height:100%;'>"
+						best_html += "<img src='resources/toon_main_img/"+rdto.main_image+"' style='width:100%; height:100%;'>"
 						best_html += "</a>"
 						best_html += "</div>"
 						best_html += "<div id='best_info'>"
@@ -199,7 +200,7 @@ canvas{display:inline-block; vertical-align:baseline; display:relative;}
 						best_html += "</div>"
 						best_html += "</div>"
 						best_html += "<div class='best_content' style='width:92%; height:90px; margin:10px 0 10px; padding-top:15px; border-top:1px solid #44444b; line-height:1.8; font-size:12px; font-weight:400; overflow:hidden;'>"+rdto.toon_info +"</div>"
-						best_html += "<button id='view_best"+rdto.toon_info +"' param='"+rdto.toon_info +"' style='width:92%; height:30px; border:1px solid red; color:white; background:red; font-weight:400; -webkit-transition-duration:0.5s;'>감상하기</button>"
+						best_html += "<button id='view_best"+rdto.toon_num +"' param='"+rdto.toon_num +"' style='width:92%; height:30px; border:1px solid red; color:white; background:red; font-weight:400; -webkit-transition-duration:0.5s;'>감상하기</button>"
 						best_html += "</div>"
 						best_html += "</div>"					
 					$('#view_best').html(best_html)
@@ -242,6 +243,8 @@ canvas{display:inline-block; vertical-align:baseline; display:relative;}
 		$(document).on('click', '#select_new', function(){
 			$('#select_new').css({'color' : 'white', 'border' : '1px solid red', 'background' : 'red'})
 			$('#select_today').css({'color' : '333', 'border' : '1px solid #aaa', 'background' : 'transparent'})
+			$('#div_1').css({'color' : 'red'})
+	    	$('#div_6').css({'color' : '#787878'})
 			alert("!")
 			$.ajax({
 				url : 'rank_10',
@@ -251,10 +254,11 @@ canvas{display:inline-block; vertical-align:baseline; display:relative;}
 				success : function(data) {
 					var rlist = data.rlist
 					var rdto = data.rdto
-					var best_html =  "<div id='best_img'>"
+					var best_html =  "<div id
+					='best_img'>"
 						best_html += "<div class='best_flag'></div>"
 						best_html += "<a href='episode_page?toon_num="+rdto.toon_num +"'>"
-						best_html += "<img src='resources/toon_main_img/"+rdto.main_img+"' style='width:100%; height:100%;'>"
+						best_html += "<img src='resources/toon_main_img/"+rdto.main_image+"' style='width:100%; height:100%;'>"
 						best_html += "</a>"
 						best_html += "</div>"
 						best_html += "<div id='best_info'>"
@@ -276,7 +280,7 @@ canvas{display:inline-block; vertical-align:baseline; display:relative;}
 						best_html += "</div>"
 						best_html += "</div>"
 						best_html += "<div class='best_content' style='width:92%; height:90px; margin:10px 0 10px; padding-top:15px; border-top:1px solid #44444b; line-height:1.8; font-size:12px; font-weight:400; overflow:hidden;'>"+rdto.toon_info +"</div>"
-						best_html += "<button id='view_best"+rdto.toon_info +"' param='"+rdto.toon_info +"' style='width:92%; height:30px; border:1px solid red; color:white; background:red; font-weight:400; -webkit-transition-duration:0.5s;'>감상하기</button>"
+						best_html += "<button id='view_best"+rdto.toon_num+"' param='"+rdto.toon_num +"' style='width:92%; height:30px; border:1px solid red; color:white; background:red; font-weight:400; -webkit-transition-duration:0.5s;'>감상하기</button>"
 						best_html += "</div>"
 						best_html += "</div>"					
 					$('#view_best').html(best_html)
