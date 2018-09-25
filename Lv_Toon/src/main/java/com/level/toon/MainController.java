@@ -95,7 +95,7 @@ public class MainController {
 			trlist.get(i).setReg_date(reg_date);
 		}
 		
-		ArrayList<ObjectDTO> tflist = tdao.tr_list();
+		ArrayList<ObjectDTO> tflist = tdao.tf_list();
 		for(int i = 0; i < tflist.size(); i++) {
 			String reg_date1 = tflist.get(i).getReg_date();
 			String reg_date2 = reg_date1.substring(6, 10);
@@ -103,7 +103,7 @@ public class MainController {
 			tflist.get(i).setReg_date(reg_date);
 		}
 		
-		ArrayList<ObjectDTO> talist = tdao.tr_list();
+		ArrayList<ObjectDTO> talist = tdao.ta_list();
 		for(int i = 0; i < talist.size(); i++) {
 			String reg_date1 = talist.get(i).getReg_date();
 			String reg_date2 = reg_date1.substring(6, 10);

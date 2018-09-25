@@ -145,7 +145,7 @@ canvas{display:inline-block; vertical-align:baseline; display:relative;}
 			$("#view_btn"+toon_num).css({'top':'200px','width':'0px','height':'0px'})
 		})
 		
-		$(".nlist_div").click(function(){
+		$(".view_btn").click(function(){
 			var toon_num = $(this).attr("param")
 			location.href="episode_page?toon_num="+toon_num
 		})		
@@ -425,16 +425,16 @@ canvas{display:inline-block; vertical-align:baseline; display:relative;}
 					<c:if test="${i < 4 }">
 						<div id="nlist_div${nlist.toon_num}" class="nlist_div" param="${nlist.toon_num}" style="height:500px;">
 							<div id="list_img">
-								<a href="episode_page?toon_num=${nlist.toon_num} ">
+								<%-- <a href="episode_page?toon_num=${nlist.toon_num} "> --%>
 									<img src="resources/toon_main_img/${nlist.main_image }" id="main_img" style="width:100%; height:100%; -webkit-transition-duration:0.5s;">
-		                  		</a>
+		                  		<!-- </a> -->
 		                  		<div id="info_div" class="info_div${nlist.toon_num }" style="width:100%; height:407.31px; text-align:center; position:absolute; left:0; top:0; background:rgba(0,0,0,0.0); opacity:0; -webkit-transition-duration:0.5s;">
-								<div style="width:90%; height:80%; margin:0 auto; margin-top:5%; background:none; color:white;">
-									<p style="font-size:20px;">${nlist.toon_title }</p>
-		               				${nlist.toon_info }
-								</div>
-								<button id="view_btn${nlist.toon_num }" style="width:0%; height:0px; position:relative; top:100px; border:1px solid red; color:white; background:red; -webkit-transition-duration:0.5s;">바로보기</button>
-		            		</div>	
+									<div style="width:90%; height:80%; margin:0 auto; margin-top:5%; background:none; color:white;">
+										<p style="font-size:20px;">${nlist.toon_title }</p>
+			               				${nlist.toon_info }
+									</div>
+									<button id="view_btn${nlist.toon_num }" class="view_btn" param="${nlist.toon_num }" style="width:0%; height:0px; position:relative; top:100px; border:1px solid white; color:white; background:transparent; -webkit-transition-duration:0.5s;">바로보기</button>
+		            			</div>	
 		               		</div>
 			               	<div id="list_cate" style="margin-top:10px;">
 			                  	<span style="font-weight:bold; font-size:12px; margin-left:10px; color:#92b2de;">${nlist.cate_name }</span>
@@ -585,9 +585,14 @@ canvas{display:inline-block; vertical-align:baseline; display:relative;}
 				<c:forEach var="trlist" items="${trlist }">
 					<div id="list_div" style="height:500px;">
 						<div id="list_img">
-							<a href="episode_page?toon_num=${trlist.toon_num} ">
-								<img src="resources/toon_main_img/${trlist.main_image }" id="main_img" style="width:100%; height:100%; -webkit-transition-duration:0.5s;">
-	                  		</a>
+							<img src="resources/toon_main_img/${trlist.main_image }" id="main_img" style="width:100%; height:100%; -webkit-transition-duration:0.5s;">
+	                  		<div id="info_div" class="info_div${trlist.toon_num }" style="width:100%; height:407.31px; text-align:center; position:absolute; left:0; top:0; background:rgba(0,0,0,0.0); opacity:0; -webkit-transition-duration:0.5s;">
+								<div style="width:90%; height:80%; margin:0 auto; margin-top:5%; background:none; color:white;">
+									<p style="font-size:20px;">${trlist.toon_title }</p>
+			               			${trlist.toon_info }
+								</div>
+								<button id="view_btn${trlist.toon_num }" class="view_btn" param="${trlist.toon_num }" style="width:0%; height:0px; position:relative; top:100px; border:1px solid white; color:white; background:transparent; -webkit-transition-duration:0.5s;">바로보기</button>
+		            		</div>
 	               		</div>
 		               	<div id="list_cate" style="margin-top:10px;">
 		                  	<span style="font-weight:bold; font-size:12px; margin-left:10px; color:#92b2de;">${trlist.cate_name }</span>
@@ -628,18 +633,23 @@ canvas{display:inline-block; vertical-align:baseline; display:relative;}
 			</div>
 			
 			<div id="theme_slider2" style="width:100%; height:540px;">
-				<c:forEach var="mlist" items="${mlist }">
+				<c:forEach var="tflist" items="${tflist }">
 					<div id="list_div" style="height:500px;">
 						<div id="list_img">
-							<a href="episode_page?toon_num=${mlist.toon_num} ">
-								<img src="resources/toon_main_img/${mlist.main_image }" id="main_img" style="width:100%; height:100%; -webkit-transition-duration:0.5s;">
-	                  		</a>
+							<img src="resources/toon_main_img/${tflist.main_image }" id="main_img" style="width:100%; height:100%; -webkit-transition-duration:0.5s;">
+	                  		<div id="info_div" class="info_div${tflist.toon_num }" style="width:100%; height:407.31px; text-align:center; position:absolute; left:0; top:0; background:rgba(0,0,0,0.0); opacity:0; -webkit-transition-duration:0.5s;">
+								<div style="width:90%; height:80%; margin:0 auto; margin-top:5%; background:none; color:white;">
+									<p style="font-size:20px;">${tflist.toon_title }</p>
+			               			${tflist.toon_info }
+								</div>
+								<button id="view_btn${tflist.toon_num }" class="view_btn" param="${tflist.toon_num }" style="width:0%; height:0px; position:relative; top:100px; border:1px solid white; color:white; background:transparent; -webkit-transition-duration:0.5s;">바로보기</button>
+		            		</div>
 	               		</div>
 		               	<div id="list_cate" style="margin-top:10px;">
-		                  	<span style="font-weight:bold; font-size:12px; margin-left:10px; color:#92b2de;">${mlist.cate_name }</span>
+		                  	<span style="font-weight:bold; font-size:12px; margin-left:10px; color:#92b2de;">${tflist.cate_name }</span>
 		               	</div>
 		               	<div id="list_title">
-		                 	<span style="font-weight:bold; margin-left:10px; color:222; font-size:16px; overflow:hidden;">${mlist.toon_title }</span>
+		                 	<span style="font-weight:bold; margin-left:10px; color:222; font-size:16px; overflow:hidden;">${tflist.toon_title }</span>
 		               	</div>
             		</div>
         	</c:forEach>
