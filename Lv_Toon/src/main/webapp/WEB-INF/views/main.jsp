@@ -204,7 +204,7 @@ $(document).on('keyup','#search',function(){
                
                   
             $.each(res,function(i){
-               search_html="<div style='width:100%; height:60px; display:flex; flex-direction:row;'>"
+               search_html="<div id='ep_go' class='ep_go"+res[i].toon_num+"' param='"+res[i].toon_num+"' style='width:100%; height:60px; display:flex; flex-direction:row; cursor:pointer'>"
                search_html+=   "<div style='width:60px; height:100%;'>"
                search_html+=      "<img src='resources/toon_main_img/"+res[i].main_image+"' style='width:90%; height:90%; margin:5% 5%;'>"
                search_html+=   "</div>"
@@ -222,6 +222,10 @@ $(document).on('keyup','#search',function(){
          }
       })
    }
+})
+$(document).on('click','#ep_go',function(){
+	var toon_num = $(this).attr("param")
+	location.href="episode_page?toon_num="+toon_num
 })
 </script>
 <div id="login_mask">

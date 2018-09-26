@@ -339,27 +339,47 @@ canvas{display:inline-block; vertical-align:baseline; display:relative;}
 			})
 		})
 		
-		var ck_circle = 0
-		$(window).scroll(function () {
-			var height = $(document).scrollTop();			
-			var obj = $("#rank_div").offset();
-			if(height >= obj.top - 400 && ck_circle == 0){
-				$("#view_best").css({'opacity':'1'})
-				$("#best_image").css({'top':'0px'})
-				setTimeout(function(){
-					$("#best_info").css({'left':'300px'})
-				},400)
-				setTimeout(function(){
-				$("#best_info").css({'opacity':'1'})
-				},500)
-				setTimeout(function(){
-					animateCircle();
-				},1000)
-				ck_circle += 1
-			}
-		}); 
+	     var a=0
+	      var star = ${odto.toon_star_rating }
+	      var k=0.0
+	      $(window).scroll(function () {
+	         var height = $(document).scrollTop();         
+	         var obj = $("#rank_div").offset();
+	         if(height >= obj.top - 400){
+	            
+	            // rank 나타나게
+	         }
+	         var scrollTop = $(document).scrollTop()
+	         if(scrollTop>2500 && a==0){
+	            a++
+	            $("#view_best").css({'opacity':'1'})
+	            $("#best_image").css({'top':'0px'})
+	            setTimeout(function(){
+	               $("#best_info").css({'left':'300px'})
+	            },400)
+	            setTimeout(function(){
+	            $("#best_info").css({'opacity':'1'})
+	            },500)
+	            setTimeout(function(){
+	               animateCircle()
+	               var jj = setInterval(function(){
+	               if(k>=star-0.1){
+	                  clearInterval(jj)
+	               }
+	               $(".star").html(k.toFixed(1))
+	               k = k+0.1
+	               },10)
+	            },1000)
+	            
+	            
+	            
+	         }
+	      });
 	})
-	
+	var scrollTop = $(document).scrollTop()
+	if(scrollTop>2500){
+		animateCircle()
+	}
 	function animateCircle(){
 		var ctx = document.querySelector('#canvas_circle').getContext('2d');
 		var end
@@ -368,10 +388,11 @@ canvas{display:inline-block; vertical-align:baseline; display:relative;}
 			end = (270 + 36 * toon_star_rating) * Math.PI / 180
 		}else{
 			end = (36 * toon_star_rating - 90) * Math.PI / 180
+
 		}		
 		
 		for(var i = 0; i < 100; i++){
-			draw(i)
+			draw(i);
 		}
 		
 		function draw(delay){	       
@@ -535,7 +556,7 @@ canvas{display:inline-block; vertical-align:baseline; display:relative;}
 								<span class="circle_score" style="position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0);">평점</span>
 								<div id="main_circle" class="circle" data-value="0.98" style="position:relative; display:inline-box;">
 									<canvas id="canvas_circle" width="80" height="80"></canvas>
-									<strong style="position:absolute; top:0; left:0; width:80px; height:80px; color:red; text-align:center; line-height:80px; font-size:26px; font-weight:400;">${odto.toon_star_rating }</strong>
+									<strong id="star" class="star" style="position:absolute; top:0; left:0; width:80px; height:80px; color:red; text-align:center; line-height:80px; font-size:26px; font-weight:400;"></strong>
 								</div>
 							</div>
 							<div class="best_content" style="width:92%; height:90px; margin:10px 0 10px; padding-top:15px; border-top:1px solid #44444b; line-height:1.8; font-size:12px; font-weight:400; overflow:hidden; ">
