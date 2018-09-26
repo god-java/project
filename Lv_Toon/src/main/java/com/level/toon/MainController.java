@@ -87,28 +87,69 @@ public class MainController {
 			odto = drlist.get(0);
 		}		
 		
+		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREAN);
+		String today = sdf2.format(date);
 		ArrayList<ObjectDTO> trlist = tdao.tr_list();
 		for(int i = 0; i < trlist.size(); i++) {
-			String reg_date1 = trlist.get(i).getReg_date();
-			String reg_date2 = reg_date1.substring(6, 10);
-			String reg_date = reg_date2.replace('-', '/');
-			trlist.get(i).setReg_date(reg_date);
+			
+			int toon_num = trlist.get(i).getToon_num();
+			int ep_count = edao.total_ep_count(toon_num);
+			if(ep_count > 0) {
+				trlist.get(i).setEp_count(ep_count);
+				
+				String recent_upload_date1 = tdao.recent_upload_date(toon_num);
+				String recent_upload_date2 = recent_upload_date1.substring(6, 10);
+				String recent_upload_date = recent_upload_date2.replace('-', '/');
+				trlist.get(i).setRecent_upload_date(recent_upload_date);
+				
+				String upload_status = recent_upload_date1.substring(0, 10);
+				if (upload_status.equals(today)) {
+					trlist.get(i).setUpload_status("o");
+				}
+			}
+			
 		}
 		
 		ArrayList<ObjectDTO> tflist = tdao.tf_list();
 		for(int i = 0; i < tflist.size(); i++) {
-			String reg_date1 = tflist.get(i).getReg_date();
-			String reg_date2 = reg_date1.substring(6, 10);
-			String reg_date = reg_date2.replace('-', '/');
-			tflist.get(i).setReg_date(reg_date);
+			
+			int toon_num = tflist.get(i).getToon_num();
+			int ep_count = edao.total_ep_count(toon_num);
+			if(ep_count > 0) {
+				tflist.get(i).setEp_count(ep_count);
+				
+				String recent_upload_date1 = tdao.recent_upload_date(toon_num);
+				String recent_upload_date2 = recent_upload_date1.substring(6, 10);
+				String recent_upload_date = recent_upload_date2.replace('-', '/');
+				tflist.get(i).setRecent_upload_date(recent_upload_date);
+								
+				String upload_status = recent_upload_date1.substring(0, 10);
+				System.out.println("today : " + today);
+				System.out.println("upload_status : " + upload_status);
+				if (upload_status.equals(today)) {
+					tflist.get(i).setUpload_status("o");
+				}
+			}
 		}
 		
 		ArrayList<ObjectDTO> talist = tdao.ta_list();
 		for(int i = 0; i < talist.size(); i++) {
-			String reg_date1 = talist.get(i).getReg_date();
-			String reg_date2 = reg_date1.substring(6, 10);
-			String reg_date = reg_date2.replace('-', '/');
-			talist.get(i).setReg_date(reg_date);
+			
+			int toon_num = talist.get(i).getToon_num();
+			int ep_count = edao.total_ep_count(toon_num);
+			if(ep_count > 0) {
+				talist.get(i).setEp_count(ep_count);
+				
+				String recent_upload_date1 = tdao.recent_upload_date(toon_num);
+				String recent_upload_date2 = recent_upload_date1.substring(6, 10);
+				String recent_upload_date = recent_upload_date2.replace('-', '/');
+				talist.get(i).setRecent_upload_date(recent_upload_date);
+				
+				String upload_status = recent_upload_date1.substring(0, 10);
+				if (upload_status.equals(today)) {
+					talist.get(i).setUpload_status("o");
+				}
+			}
 		}
 		
 		m.addAttribute("tlist", tlist);

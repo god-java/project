@@ -23,7 +23,7 @@
 #main_img:hover{-webkit-transform:scale(1.03);}
 .list_title{width:100%; font-size:27px; font-weight:600px; letter-spacing:-1.5px; color:#333; margin-left:25px;}
 .nlist_div{width:22%; height:480px; margin-left:25px; margin-top:20px; display:inline-block; background:white; border:1px solid #e8e8e8; position:relative;  overflow:hidden;}
-
+.th_list_div{width:22%; height:480px; margin-left:25px; margin-top:20px; display:inline-block; background:white; border:1px solid #e8e8e8; position:relative;  overflow:hidden;}
 #list_div{width:22%; height:480px; margin-left:25px; margin-top:20px; display:inline-block; background:white; border:1px solid #e8e8e8;}
 
 canvas{display:inline-block; vertical-align:baseline; display:relative;}
@@ -36,7 +36,7 @@ canvas{display:inline-block; vertical-align:baseline; display:relative;}
 #best_img{position:relative; width:280px; height:396px; margin-left:30px; transition:all 0.5s ease-out; z-index:2;}
 .best_flag{position:absolute; display:block; top:1px; left:0; z-index:100; width:57px; height:71px; background:url(resources/icon/badge-best.png) no-repeat 0 0;}
 #best_info{position:absolute; top:17px; left:290px; width:324px; height:370px; background:#232529; color:white; border-radius:10px; z-index:1;}
-
+#rec_next:hover{}
 
 
 .slider .slick-dots {
@@ -129,6 +129,14 @@ canvas{display:inline-block; vertical-align:baseline; display:relative;}
 			nextArrow: '<button id="rec_next" style="position:absolute; background:white; width:30px; height:30px; top:-20px; left:1230px; border:1px solid #d8d8d8;"> > </button>',
 			prevArrow: '<button id="rec_prev"style="position:absolute; background:white; width:30px; height:30px; top:-20px; left:1190px; border:1px solid #d8d8d8;"> < </button>',
 		})
+		
+		$('#theme_slider3').slick({
+			infinite: false,
+			slidesToShow: 4,
+			slidesToScroll: 1,
+			nextArrow: '<button id="rec_next" style="position:absolute; background:white; width:30px; height:30px; top:-20px; left:1230px; border:1px solid #d8d8d8;"> > </button>',
+			prevArrow: '<button id="rec_prev"style="position:absolute; background:white; width:30px; height:30px; top:-20px; left:1190px; border:1px solid #d8d8d8;"> < </button>',
+		})
 	});	
 </script>
 <script type="text/javascript">
@@ -140,6 +148,18 @@ canvas{display:inline-block; vertical-align:baseline; display:relative;}
 		})
 		
 		$(".nlist_div").mouseout(function(){
+			var toon_num = $(this).attr("param")
+			$(".info_div"+toon_num).css({'opacity':'0','background':'rgba(0,0,0,0.0)'})
+			$("#view_btn"+toon_num).css({'top':'200px','width':'0px','height':'0px'})
+		})
+		
+		$(".th_list_div").mouseover(function(){
+			var toon_num = $(this).attr("param")
+			$(".info_div"+toon_num).css({'opacity':'1','background':'rgba(0,0,0,0.5)'})
+			$("#view_btn"+toon_num).css({'top':'0px','width':'80%','height':'40px'})
+		})
+		
+		$(".th_list_div").mouseout(function(){
 			var toon_num = $(this).attr("param")
 			$(".info_div"+toon_num).css({'opacity':'0','background':'rgba(0,0,0,0.0)'})
 			$("#view_btn"+toon_num).css({'top':'200px','width':'0px','height':'0px'})
@@ -165,7 +185,8 @@ canvas{display:inline-block; vertical-align:baseline; display:relative;}
 		$(document).on('click', '#select_today', function(){
 			$('#select_today').css({'color' : 'white', 'border' : '1px solid red', 'background' : 'red'})
 			$('#select_new').css({'color' : '333', 'border' : '1px solid #aaa', 'background' : 'transparent'})
-			
+			$('#div_1').css({'color' : 'red'})
+	    	$('#div_6').css({'color' : '#787878'})
 			$.ajax({
 				url : 'rank_10',
 				type : 'post',
@@ -199,7 +220,7 @@ canvas{display:inline-block; vertical-align:baseline; display:relative;}
 						best_html += "</div>"
 						best_html += "</div>"
 						best_html += "<div class='best_content' style='width:92%; height:90px; margin:10px 0 10px; padding-top:15px; border-top:1px solid #44444b; line-height:1.8; font-size:12px; font-weight:400; overflow:hidden;'>"+rdto.toon_info +"</div>"
-						best_html += "<button id='view_best"+rdto.toon_info +"' param='"+rdto.toon_info +"' style='width:92%; height:30px; border:1px solid red; color:white; background:red; font-weight:400; -webkit-transition-duration:0.5s;'>감상하기</button>"
+						best_html += "<button id='view_best"+rdto.toon_num +"' param='"+rdto.toon_num +"' style='width:92%; height:30px; border:1px solid red; color:white; background:red; font-weight:400; -webkit-transition-duration:0.5s;'>감상하기</button>"
 						best_html += "</div>"
 						best_html += "</div>"					
 					$('#view_best').html(best_html)
@@ -242,6 +263,8 @@ canvas{display:inline-block; vertical-align:baseline; display:relative;}
 		$(document).on('click', '#select_new', function(){
 			$('#select_new').css({'color' : 'white', 'border' : '1px solid red', 'background' : 'red'})
 			$('#select_today').css({'color' : '333', 'border' : '1px solid #aaa', 'background' : 'transparent'})
+			$('#div_1').css({'color' : 'red'})
+	    	$('#div_6').css({'color' : '#787878'})
 			alert("!")
 			$.ajax({
 				url : 'rank_10',
@@ -276,7 +299,7 @@ canvas{display:inline-block; vertical-align:baseline; display:relative;}
 						best_html += "</div>"
 						best_html += "</div>"
 						best_html += "<div class='best_content' style='width:92%; height:90px; margin:10px 0 10px; padding-top:15px; border-top:1px solid #44444b; line-height:1.8; font-size:12px; font-weight:400; overflow:hidden;'>"+rdto.toon_info +"</div>"
-						best_html += "<button id='view_best"+rdto.toon_info +"' param='"+rdto.toon_info +"' style='width:92%; height:30px; border:1px solid red; color:white; background:red; font-weight:400; -webkit-transition-duration:0.5s;'>감상하기</button>"
+						best_html += "<button id='view_best"+rdto.toon_num+"' param='"+rdto.toon_num +"' style='width:92%; height:30px; border:1px solid red; color:white; background:red; font-weight:400; -webkit-transition-duration:0.5s;'>감상하기</button>"
 						best_html += "</div>"
 						best_html += "</div>"					
 					$('#view_best').html(best_html)
@@ -316,42 +339,42 @@ canvas{display:inline-block; vertical-align:baseline; display:relative;}
 			})
 		})
 		
-		var a=0
-		var star = ${odto.toon_star_rating }
-		var k=0.0
-		$(window).scroll(function () {
-			var height = $(document).scrollTop();			
-			var obj = $("#rank_div").offset();
-			if(height >= obj.top - 400){
-				
-				// rank 나타나게
-			}
-			var scrollTop = $(document).scrollTop()
-			if(scrollTop>2500 && a==0){
-				a++
-				$("#view_best").css({'opacity':'1'})
-				$("#best_image").css({'top':'0px'})
-				setTimeout(function(){
-					$("#best_info").css({'left':'300px'})
-				},400)
-				setTimeout(function(){
-				$("#best_info").css({'opacity':'1'})
-				},500)
-				setTimeout(function(){
-					animateCircle()
-					var jj = setInterval(function(){
-					if(k>=star-0.1){
-						clearInterval(jj)
-					}
-					$(".star").html(k.toFixed(1))
-					k = k+0.1
-					},10)
-				},1000)
-				
-				
-				
-			}
-		});
+	     var a=0
+	      var star = ${odto.toon_star_rating }
+	      var k=0.0
+	      $(window).scroll(function () {
+	         var height = $(document).scrollTop();         
+	         var obj = $("#rank_div").offset();
+	         if(height >= obj.top - 400){
+	            
+	            // rank 나타나게
+	         }
+	         var scrollTop = $(document).scrollTop()
+	         if(scrollTop>2500 && a==0){
+	            a++
+	            $("#view_best").css({'opacity':'1'})
+	            $("#best_image").css({'top':'0px'})
+	            setTimeout(function(){
+	               $("#best_info").css({'left':'300px'})
+	            },400)
+	            setTimeout(function(){
+	            $("#best_info").css({'opacity':'1'})
+	            },500)
+	            setTimeout(function(){
+	               animateCircle()
+	               var jj = setInterval(function(){
+	               if(k>=star-0.1){
+	                  clearInterval(jj)
+	               }
+	               $(".star").html(k.toFixed(1))
+	               k = k+0.1
+	               },10)
+	            },1000)
+	            
+	            
+	            
+	         }
+	      });
 	})
 	var scrollTop = $(document).scrollTop()
 	if(scrollTop>2500){
@@ -365,10 +388,13 @@ canvas{display:inline-block; vertical-align:baseline; display:relative;}
 			end = (270 + 36 * toon_star_rating) * Math.PI / 180
 		}else{
 			end = (36 * toon_star_rating - 90) * Math.PI / 180
-		}
+
+		}		
+		
 		for(var i = 0; i < 100; i++){
 			draw(i);
 		}
+		
 		function draw(delay){	       
 			setTimeout(function() {
 				ctx.strokeStyle = "#ee312f";
@@ -596,9 +622,6 @@ canvas{display:inline-block; vertical-align:baseline; display:relative;}
 	</div>
 	
 	<div id="center_bottom" style="height:1800px;">
-	
-	
-	
 		<div id="theme_list1" style="width:100%; margin-top:50px;">
 			<div id="theme_title" class="theme_title" style="width:100%; height:80px; padding-left:25px;">
 				<div class="theme_img" style="float:left; padding-right:15px;">
@@ -612,7 +635,7 @@ canvas{display:inline-block; vertical-align:baseline; display:relative;}
 			
 			<div id="theme_slider1" style="width:100%; height:510px;">
 				<c:forEach var="trlist" items="${trlist }">
-					<div id="list_div" style="height:500px;">
+					<div id="th_list_div${trlist.toon_num}" class="th_list_div" param="${trlist.toon_num}" style="height:500px;">
 						<div id="list_img">
 							<img src="resources/toon_main_img/${trlist.main_image }" id="main_img" style="width:100%; height:100%; -webkit-transition-duration:0.5s;">
 	                  		<div id="info_div" class="info_div${trlist.toon_num }" style="width:100%; height:407.31px; text-align:center; position:absolute; left:0; top:0; background:rgba(0,0,0,0.0); opacity:0; -webkit-transition-duration:0.5s;">
@@ -642,7 +665,20 @@ canvas{display:inline-block; vertical-align:baseline; display:relative;}
 							</span>
 				        </div>
 				        <div id="list_date" style=" margin-top:5px;">
-				         	<span style="font-weight:300; margin-left:10px; color:white; font-size:11px; background:#92b2de; padding:1px 5px; margin-bottom:10px;"> ${trlist.reg_date } </span>
+				        	<c:choose>
+				        		<c:when test="${trlist.upload_type == '월간'}">
+									<span style="font-weight:300; margin-left:10px; color:white; font-size:11px; background:#2196f3; padding:1px 5px; margin-bottom:10px;"> 월간 </span>
+								</c:when>
+								<c:otherwise>
+									<span style="margin-left:5px; color:white;"> </span>
+								</c:otherwise>
+				        	</c:choose>
+					        <c:if test="${trlist.ep_count > 0 }">
+					        	<span style="font-weight:300; margin-left:5px; color:white; font-size:11px; background:#92b2de; padding:1px 5px; margin-bottom:10px;"> ${trlist.recent_upload_date } </span>
+					        </c:if>				         	
+				        	<c:if test="${trlist.upload_status == 'o'}">
+					        	<span style="font-weight:300; margin-left:5px; color:white; font-size:11px; background:#f43535; padding:1px 5px; margin-bottom:10px;"> UP </span>
+					        </c:if>	
 				        </div>
             		</div>
         		</c:forEach>
@@ -663,7 +699,7 @@ canvas{display:inline-block; vertical-align:baseline; display:relative;}
 			
 			<div id="theme_slider2" style="width:100%; height:540px;">
 				<c:forEach var="tflist" items="${tflist }">
-					<div id="list_div" style="height:500px;">
+					<div id="th_list_div${tflist.toon_num}" class="th_list_div" param="${tflist.toon_num}" style="height:500px;">
 						<div id="list_img">
 							<img src="resources/toon_main_img/${tflist.main_image }" id="main_img" style="width:100%; height:100%; -webkit-transition-duration:0.5s;">
 	                  		<div id="info_div" class="info_div${tflist.toon_num }" style="width:100%; height:407.31px; text-align:center; position:absolute; left:0; top:0; background:rgba(0,0,0,0.0); opacity:0; -webkit-transition-duration:0.5s;">
@@ -680,9 +716,110 @@ canvas{display:inline-block; vertical-align:baseline; display:relative;}
 		               	<div id="list_title">
 		                 	<span style="font-weight:bold; margin-left:10px; color:222; font-size:16px; overflow:hidden;">${tflist.toon_title }</span>
 		               	</div>
+		               	<div id="list_writer">
+							<span style="font-weight:400; margin-left:10px; color:silver; font-size:13px; overflow:hidden;">
+							<c:choose>
+								<c:when test="${tflist.toon_writer == tflist.toon_painter }">
+									${tflist.toon_writer }
+								</c:when>
+								<c:otherwise>
+									${tflist.toon_writer } | ${tflist.toon_painter }
+								</c:otherwise>
+							</c:choose>
+							</span>
+				        </div>
+				        <div id="list_date" style=" margin-top:5px;">
+				        	<c:choose>
+				        		<c:when test="${tflist.upload_type == '월간'}">
+									<span style="font-weight:300; margin-left:10px; color:white; font-size:11px; background:#2196f3; padding:1px 5px; margin-bottom:10px;"> 월간 </span>
+								</c:when>
+								<c:otherwise>
+									<span style="margin-left:5px; color:white;"> </span>
+								</c:otherwise>
+				        	</c:choose>
+					        <c:if test="${tflist.ep_count > 0 }">
+					        	<span style="font-weight:300; margin-left:5px; color:white; font-size:11px; background:#92b2de; padding:1px 5px; margin-bottom:10px;"> ${tflist.recent_upload_date } </span>
+					        </c:if>				         	
+				        	<c:if test="${tflist.upload_status == 'o'}">
+					        	<span style="font-weight:300; margin-left:5px; color:white; font-size:11px; background:#f43535; padding:1px 5px; margin-bottom:10px;"> UP </span>
+					        </c:if>	
+				        </div>
             		</div>
-        	</c:forEach>
+        		</c:forEach>
+			</div>			
+		</div>
+		
+		<div id="theme_list3" style="width:100%; margin-top:50px; margin-bottom:50px;">
+			<div id="theme_title" class="theme_title" style="width:100%; height:80px; padding-left:25px;">
+				<div class="theme_img" style="float:left; padding-right:15px;">
+					<img src="resources/icon/2018_08_27_15353393266346.jpg" style="width:80px; height:80px; border-radius:50%; vertical-align:middle;">
+				</div>
+				<div class="theme_info" style="float:left; display:table-cell; vertical-align:center; padding-top:10px; vertical-align:top;">
+					<small style="display:block; color:#989898; font-size:14px;">속 시원하게! 한번 달려볼까?</small>
+					<h3 style="margin:0; display:block; color:#222; letter-spacing:-1px; font-size:33px; font-weight:400;">'퐈이터'들의 진검승부</h3>
+				</div>
 			</div>
+			<div id="theme_slider3" style="width:100%; height:540px;">
+				<c:forEach var="talist" items="${talist }">
+					<div id="th_list_div${talist.toon_num}" class="th_list_div" param="${talist.toon_num}" style="height:500px;">
+						<div id="list_img">
+							<img src="resources/toon_main_img/${talist.main_image }" id="main_img" style="width:100%; height:100%; -webkit-transition-duration:0.5s;">
+	                  		<div id="info_div" class="info_div${talist.toon_num }" style="width:100%; height:407.31px; text-align:center; position:absolute; left:0; top:0; background:rgba(0,0,0,0.0); opacity:0; -webkit-transition-duration:0.5s;">
+								<div style="width:90%; height:80%; margin:0 auto; margin-top:5%; background:none; color:white;">
+									<p style="font-size:20px;">${talist.toon_title }</p>
+			               			${talist.toon_info }
+								</div>
+								<button id="view_btn${talist.toon_num }" class="view_btn" param="${talist.toon_num }" style="width:0%; height:0px; position:relative; top:100px; border:1px solid white; color:white; background:transparent; -webkit-transition-duration:0.5s;">바로보기</button>
+		            		</div>
+	               		</div>
+		               	<div id="list_cate" style="margin-top:10px;">
+		                  	<span style="font-weight:bold; font-size:12px; margin-left:10px; color:#92b2de;">${talist.cate_name }</span>
+		               	</div>
+		               	<div id="list_title">
+		                 	<span style="font-weight:bold; margin-left:10px; color:222; font-size:16px; overflow:hidden;">${talist.toon_title }</span>
+		               	</div>
+		               	<div id="list_writer">
+							<span style="font-weight:400; margin-left:10px; color:silver; font-size:13px; overflow:hidden;">
+							<c:choose>
+								<c:when test="${talist.toon_writer == talist.toon_painter }">
+									${talist.toon_writer }
+								</c:when>
+								<c:otherwise>
+									${talist.toon_writer } | ${talist.toon_painter }
+								</c:otherwise>
+							</c:choose>
+							</span>
+				        </div>
+				        <div id="list_date" style="margin-top:5px;">
+				        	<c:choose>
+				        		<c:when test="${talist.upload_type == '월간'}">
+									<span style="font-weight:300; margin-left:10px; color:white; font-size:11px; background:#2196f3; padding:1px 5px; margin-bottom:10px;"> 월간 </span>
+								</c:when>
+								<c:otherwise>
+									<span style="margin-left:5px; color:white;"> </span>
+								</c:otherwise>
+				        	</c:choose>
+					        <c:if test="${talist.ep_count > 0 }">
+					        	<span style="font-weight:300; margin-left:5px; color:white; font-size:11px; background:#92b2de; padding:1px 5px; margin-bottom:10px;"> ${talist.recent_upload_date } </span>
+					        </c:if>				         	
+				        	<c:if test="${talist.upload_status == 'o'}">
+					        	<span style="font-weight:300; margin-left:5px; color:white; font-size:11px; background:#f43535; padding:1px 5px; margin-bottom:10px;"> UP </span>
+					        </c:if>	
+				        </div>
+            		</div>
+        		</c:forEach>
+			</div>
+		</div>
+	</div>
+	
+	<div id="bottom_ad1" style="width:100%; background:#5C23A4; margin-top:200px;">
+		<div id="ad_img1" style="width:1230px; margin:0 auto; padding:0 15px;">
+			<img src="resources/ad_img/2018_08_22_1534932047102.png" style="width:1200px; height:auto; vertical-align: middle">
+		</div>
+	</div>
+	<div id="bottom_ad2" style="width:100%; background:#FA5656;">
+		<div id="ad_img1" style="width:1230px; margin:0 auto; padding:0 15px;">
+			<img src="resources/ad_img/2018_08_22_15349320677458.png" style="width:1200px; height:auto; vertical-align: middle">
 		</div>
 	</div>
 </div>

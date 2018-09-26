@@ -71,6 +71,14 @@ input[type='button'],button{cursor:pointer;}
 #my_info_coin div{background:#000030;}
 #my_info_coin span{color:white; font-size:11px;}
 
+#footer{width:100%; border-bottom:1px solid #D8D8D8;}
+#footer_top{width:100%; background:#2f2e2e; text-align:center; color:#515151;}
+#ft_div{width:1260px; margin:0 auto; padding:10px 0;}
+#ft_ul{display:inline-block; list-style:none; padding:0; margin:0; color:#e8e8e8;}
+#ft_ul li{display:inline-block; text-align:-webkit-match-parent; padding-right:20px; padding-left:20px; border-right:1px solid #e8e8e8;}
+#ft_ul li a{color:#e8e8e8;}
+#ft_ul li:firsr-child{padding-left:0px;}
+#ft_ul li:last-child{padding-right:0px; border-right:none;}
 </style>
 </head>
 <body>
@@ -368,101 +376,147 @@ $(document).ready(function(){
 	$("#id").html(id)
 })
 </script>
-   <div id="header">
-      <ul>
-         <li>
-            <a href="main">
-               <span style="font-size:15px; font-weight:bolder; color:blue;">LT</span>
-            </a>
-         </li>
-         <li>
-            <a href="#" id="weekly">
-         	      주간
-            </a>
-         </li>
-         <li>
-            <a href="monthly">
-            	   월간
-            </a>
-         </li>
-         <li>
-            <a href="rank?cate_num=0&type=all">
-           	    랭킹
-            </a>
-         </li>
-         <li>
-            <a href="toon_upload">
-            	   더보기
-            </a>
-         </li>
-         <li>
-            <a href="event">
-         	      성인
-            </a>
-         </li>
-         <li style="display:flex; flex-direction:row; width:15%;">
-            <input type="text" id="search" placeholder="만화제목 or 작가명 입력...">
-            <i class="fa fas fa-search fa-fw" style="margin:auto 0; position: relative; left:-20px;"></i>
-            <div id="search_body" style="width:200px; height:300px; border:1px solid gray; position:absolute; top:50px; background:white; z-index:-1; opacity: 0; -webkit-transition-duration:0.5s;">
-               <div id="search_res" style="width:90%; height:90%; margin:5% 5%; overflow-y:scroll;">
-               </div>
-            </div>
-         </li>
-         <li>
-            <c:if test="${member_num==null }">
-               <input type="button" value="로그인" id="login_btn">
-            </c:if>
-            <c:if test="${member_num!=null }">
-               <!-- <input type="button" value="로그아웃" onclick="logout()" id="logout_btn"> -->
-               <button id="my_info_btn" style="width:40px; height:30px; border:1px solid #D8D8D8; background:white; -webkit-transition-duration:0.5s;">
-                  <div id="my_info_line1" style="position:relative; left:3px; top:3px; width:13px; height:5px; border-radius:5px; background:black; -webkit-transform:rotate(45deg); -webkit-transition-duration:0.5s;">
-                  </div>
-                  <div id="my_info_line2" style="position:relative; top:-2px; left:10px; width:13px; height:5px; border-radius:5px; background:black; -webkit-transform:rotate(-45deg); -webkit-transition-duration:0.5s;">
-                  </div>
-               </button>
-               <div id="my_info_div" class="my_info_div" style="position:relative; left:-105px; top:-10px; opacity:0; width:200px; height:300px; border:1px solid gray; background:white; -webkit-transition-duration:0.5s;">
-                  <div id="my_info_top" style="width:100%; height:100px;">
-                     <div id="my_info_email" style="width:100%; height:50px; line-height:50px; text-align:left;">
-                        <span id="id" style="margin-left:10px; font-size:15px;"></span>
-                        <span>님 안녕하세요</span>
-                     </div>
-                     <div id="my_info_coin" style="width:60%; height:50px; float:left;">
-                        <div id="my_info_coin_top" style="width:100%; height:50%; line-height:25px; text-align:left;">
-                           <span style="margin-left:10px;">일반 : </span><span>${coin }코인</span>
-                        </div>
-                        <div id="my_info_coin_bottom" style="width:100%; height:50%; line-height:20px; text-align:left;">
-                           <span style="margin-left:10px;">보너스 : </span><span>0코인</span>
-                        </div>
-                     </div>
-                     <div id="my_info_charge" style="width:40%; height:50px; line-height:50px; float:left;">
-                        <button onclick="location.href='coin_charge'" style="width:90%; border:1px solid #817EE4; background:#817EE4; color:white; border-radius:5px; height:30px; margin-top:10px; margin-left:-5px;">충전하기</button>
-                     </div>
-                  </div>
-                  <div id="my_info_menu" style="width:100%; height:50px; text-align:left; line-height:50px; border-bottom:1px solid #D8D8D8;">
-                     <a href="my_page?member_num=${member_num }" style="margin-left:10px;">마이 페이지</a>
-                  </div>
-                  <div id="my_info_menu" style="width:100%; height:50px; text-align:left; line-height:50px; border-bottom:1px solid #D8D8D8;">
-                     <a href="my_page?member_num=${member_num }" style="margin-left:10px;">내서재</a>
-                  </div>
-                  <div id="my_info_menu" style="width:100%; height:50px; text-align:left; line-height:50px; border-bottom:1px solid #D8D8D8;">
-                     <a href="zzim" style="margin-left:10px;">찜목록</a>
-                  </div>
-                  <div id="my_info_menu" style="width:100%; height:50px; text-align:left; line-height:50px; border-bottom:1px solid #D8D8D8;">
-                     <a href="logout" style="margin-left:10px;">로그아웃</a>
-                  </div>
-               </div>
-            </c:if>
-         </li>
-      </ul>
-   </div>
-   <div id="top">
+	<div id="header">
+		<ul>
+			<li>
+            	<a href="main">
+               		<span style="font-size:15px; font-weight:bolder; color:blue;">LT</span>
+            	</a>
+         	</li>
+         	<li>
+            	<a href="#" id="weekly">
+         	      	주간
+            	</a>
+         	</li>
+         	<li>
+            	<a href="monthly">
+            	   	월간
+            	</a>
+         	</li>
+         	<li>
+            	<a href="rank?cate_num=0&type=all">
+           	   	 	랭킹
+            	</a>
+         	</li>
+         	<li>
+            	<a href="toon_upload">
+            	   	더보기
+           	 	</a>
+         	</li>
+         	<li>
+            	<a href="event">
+         	     	성인
+            	</a>
+         	</li>
+         	<li style="display:flex; flex-direction:row; width:15%;">
+            	<input type="text" id="search" placeholder="만화제목 or 작가명 입력...">
+            	<i class="fa fas fa-search fa-fw" style="margin:auto 0; position: relative; left:-20px;"></i>
+            	<div id="search_body" style="width:200px; height:300px; border:1px solid gray; position:absolute; top:50px; background:white; z-index:-1; opacity: 0; -webkit-transition-duration:0.5s;">
+               		<div id="search_res" style="width:90%; height:90%; margin:5% 5%; overflow-y:scroll;">
+               		</div>
+				</div>
+			</li>
+			<li>
+            	<c:if test="${member_num==null }">
+               		<input type="button" value="로그인" id="login_btn">
+            	</c:if>
+            	<c:if test="${member_num!=null }">
+               	<!-- <input type="button" value="로그아웃" onclick="logout()" id="logout_btn"> -->
+               	<button id="my_info_btn" style="width:40px; height:30px; border:1px solid #D8D8D8; background:white; -webkit-transition-duration:0.5s;">
+                  	<div id="my_info_line1" style="position:relative; left:3px; top:3px; width:13px; height:5px; border-radius:5px; background:black; -webkit-transform:rotate(45deg); -webkit-transition-duration:0.5s;">
+                  	</div>
+                  	<div id="my_info_line2" style="position:relative; top:-2px; left:10px; width:13px; height:5px; border-radius:5px; background:black; -webkit-transform:rotate(-45deg); -webkit-transition-duration:0.5s;">
+                  	</div>
+               	</button>
+               	<div id="my_info_div" class="my_info_div" style="position:relative; left:-105px; top:-10px; opacity:0; width:200px; height:300px; border:1px solid gray; background:white; -webkit-transition-duration:0.5s;">
+                  	<div id="my_info_top" style="width:100%; height:100px;">
+                     	<div id="my_info_email" style="width:100%; height:50px; line-height:50px; text-align:left;">
+                        	<span id="id" style="margin-left:10px; font-size:15px;"></span>
+                        	<span>님 안녕하세요</span>
+                     	</div>
+                     	<div id="my_info_coin" style="width:60%; height:50px; float:left;">
+                        	<div id="my_info_coin_top" style="width:100%; height:50%; line-height:25px; text-align:left;">
+                           		<span style="margin-left:10px;">일반 : </span><span>${coin }코인</span>
+                        	</div>
+                        	<div id="my_info_coin_bottom" style="width:100%; height:50%; line-height:20px; text-align:left;">
+                           		<span style="margin-left:10px;">보너스 : </span><span>0코인</span>
+                        	</div>
+						</div>
+							<div id="my_info_charge" style="width:40%; height:50px; line-height:50px; float:left;">
+                      		  	<button onclick="location.href='coin_charge'" style="width:90%; border:1px solid #817EE4; background:#817EE4; color:white; border-radius:5px; height:30px; margin-top:10px; margin-left:-5px;">충전하기</button>
+							</div>
+                 		</div>
+                  		<div id="my_info_menu" style="width:100%; height:50px; text-align:left; line-height:50px; border-bottom:1px solid #D8D8D8;">
+                    		 <a href="my_page?member_num=${member_num }" style="margin-left:10px;">마이 페이지</a>
+                  		</div>
+                  		<div id="my_info_menu" style="width:100%; height:50px; text-align:left; line-height:50px; border-bottom:1px solid #D8D8D8;">
+                   		  <a href="my_page?member_num=${member_num }" style="margin-left:10px;">내서재</a>
+                  		</div>
+                  		<div id="my_info_menu" style="width:100%; height:50px; text-align:left; line-height:50px; border-bottom:1px solid #D8D8D8;">
+                   			 <a href="zzim" style="margin-left:10px;">찜목록</a>
+                 		 </div>
+                 		 <div id="my_info_menu" style="width:100%; height:50px; text-align:left; line-height:50px; border-bottom:1px solid #D8D8D8;">
+                    		<a href="logout" style="margin-left:10px;">로그아웃</a>
+                  		</div>
+               		</div>
+            	</c:if>
+			</li>
+		</ul>
+	</div>
+	<div id="top">
    
-   </div>
-   <div id="center">
-      <jsp:include page="${center }"/>
-   </div>
-   <div id="footer">
-   
-   </div>
+	</div>
+	<div id="center">
+		<jsp:include page="${center }"/>
+	</div>
+	
+	<div id="footer" style="width:100%;">
+		<div id="notice_div" style="width:100%; background:#e7e9ec;">
+			<div id="notice_info" style="width:1260px; margin:0 auto; padding:20px 0; height:15px; line-height:15px;">
+				<span style="float:left; background:red; color:white; font-size:13px; font-weight:400; padding:2px 4px;">공지사항</span>
+				<a href="#" style="display:inline-block; float:left; margin-left:10px; color:#444; text-decoration:none; font-size:13px; font-weight:300;">[안내] 추석연휴기간 레벨툰 고객센터 운영 안내</a>
+			</div>
+		</div>
+		<div id="footer_top">
+			<div id="ft_div">
+				<ul id="ft_ul">
+					<li>
+						<a href="#">이용약관</a>
+					</li>
+					<li>
+						<a href="#">개인정보처리방침</a>
+					</li>
+					<li>
+						<a href="#">고객센터</a>
+					</li>
+					<li>
+						<a href="#">연재제안</a>
+					</li>
+					<li>
+						<a href="#">페이스북</a>
+					</li>
+					<li>
+						<a href="#">블로그</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="footer_info" style="width:100%; background:#3a3a3a; color:#888; padding-bottom:30px;">
+			<div id="fi_div" style="width:1260px; padding:20px 0; margin:0 auto;">
+				<div id="ft_logo" style="display:block; margin-bottom:10px;">
+					<img src="resources/main_img/logo.png" style="width:130px; height:25px;">
+				</div>
+				<strong style="font-weight:bolder; font-size:15px;">레벨툰에 게시된 모든 컨텐츠들은 저작권법에 의거 보호받고 있습니다.</strong>
+				<p style="font-size:11px; margin:0 0 10px; display:block;">
+                	저작권자 또는 (주)투믹스의 승인없이 컨텐츠의 일부 또는 전부를 복제·전송·배포 및 기타의 방법으로 저작물을 이용할 경우에는 저작권법에 의해 법적 조치에<br>
+                	처해질 수 있으므로주의하시길 바랍니다.
+                </p>
+                <p style="font-size:11px; margin:0 0 10px; display:block;">
+                	(주)레벨툰 | 사업자 등록번호 : 123-45-67890 | 통신판매업신고번호 : 제2018-서울강남-00001호 | 대표 노준수<br>
+                	주소 : 서울특별시 강남구 테헤란로 98길 8, 4층(대치동, KT&G 대치타워) | 고객센터 : 1234-5678 | E-mail : help@leveltoon.com
+                </p>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

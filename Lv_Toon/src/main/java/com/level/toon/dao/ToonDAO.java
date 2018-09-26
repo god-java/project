@@ -23,4 +23,5 @@ public interface ToonDAO {
 	public ArrayList<ObjectDTO> tf_list();
 	public ArrayList<ToonDTO> all_rank_list();
 	public ArrayList<ToonDTO> cate_rank_list(int cate_num);
+	public String recent_upload_date(int toon_num);
 }
