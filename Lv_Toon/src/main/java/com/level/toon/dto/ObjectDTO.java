@@ -51,7 +51,21 @@ public class ObjectDTO {
 	private String reg_date;
 	private String toon_info_sub;
 	private float toon_star_rating;
+	private String recent_upload_date;
+	private String upload_status;
 	
+	public String getUpload_status() {
+		return upload_status;
+	}
+	public void setUpload_status(String upload_status) {
+		this.upload_status = upload_status;
+	}
+	public String getRecent_upload_date() {
+		return recent_upload_date;
+	}
+	public void setRecent_upload_date(String recent_upload_date) {
+		this.recent_upload_date = recent_upload_date;
+	}
 	public float getToon_star_rating() {
 		return toon_star_rating;
 	}

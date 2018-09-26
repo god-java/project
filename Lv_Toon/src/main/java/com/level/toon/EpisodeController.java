@@ -59,12 +59,12 @@ public class EpisodeController {
 	public String Episode_upload_ok(Model m, EpisodeDTO edto, 
 			@RequestParam(value="ep_main_file") MultipartFile file1, @RequestParam(value="ep_toon_file") MultipartFile file2) {
 		edao = sst.getMapper(EpisodeDAO.class);		
-		String up_path = "C:/spring/study/Lv_Toon/src/main/webapp/resources/episode_main_img/";
+		String up_path = "C:/Users/pc/git/project/project/Lv_Toon/src/main/webapp/resources/episode_main_img/";
 		//E:/spring2/Lv_Toon/src/main/webapp/resources/episode_main_img/
 		//C:/spring/study/Lv_Toon/src/main/webapp/resources/episode_main_img/
 		File f = new File(up_path+file1.getOriginalFilename());
 		edto.setEp_main_image(file1.getOriginalFilename());
-		String up_path2 = "C:/spring/study/Lv_Toon/src/main/webapp/resources/episode_toon_img/";
+		String up_path2 = "C:/Users/pc/git/project/project/Lv_Toon/src/main/webapp/resources/episode_toon_img/";
 		//E:/spring2/Lv_Toon/src/main/webapp/resources/episode_toon_img/
 		//C:/spring/study/Lv_Toon/src/main/webapp/resources/episode_toon_img/
 		File f2 = new File(up_path2+file2.getOriginalFilename());

@@ -66,4 +66,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="cate_rank_list" parameterType="int" resultType="com.level.toon.dto.ToonDTO">
 		select * from lt_toon t join lt_category c on t.cate_num=c.cate_num join lt_star_score s on t.toon_num=s.toon_num where t.cate_num=#{cate_num} order by s.star_score desc
 	</select>
+	<select id="recent_upload_date" parameterType="int" resultType="String">
+		select max(ep_upload_date) from lt_episode where toon_num = #{toon_num}
+	</select>
 </mapper>
