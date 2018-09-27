@@ -178,7 +178,7 @@
 </script>
 <body>
 <c:if test="${tdto.upload_type=='ÁÖ°£' }">
-<div style="background:white; width:100%;">
+<div style="background:white; width:100%; overflow:hidden;">
 	<div id="" style="width:1260px; margin:0 auto; background:white;">
 		<div id="toon_info" style="width:100%; height:390px; margin-top:40px;">
 			<div style="float:left; width:280px; height:100%;">
